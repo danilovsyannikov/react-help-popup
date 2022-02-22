@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {IHelpPopup, IShowHelpPopupsBtnState} from "./types";
 import {connect} from "react-redux";
 import './help-popup.scss';
+import HelpPopupCont from "./helpPopupCont";
 
 /**
  * Компонент для запуска отображения подсказок
@@ -36,7 +37,7 @@ class ShowHelpPopupsBtn extends Component<{ helpPopups: Array<IHelpPopup>, child
         const {helpPopups}: { helpPopups: Array<IHelpPopup> } = this.props;
         let cur = this.state.cur;
         console.log(helpPopups);
-        if(helpPopups.length){
+        if (helpPopups.length) {
             this.showPopup(helpPopups[cur]);
         }
     }
@@ -87,16 +88,18 @@ class ShowHelpPopupsBtn extends Component<{ helpPopups: Array<IHelpPopup>, child
         return (
             <>
                 <span className={"show-help-popups-btn"}
-                        onClick={this.showAllPopups}>
+                      onClick={this.showAllPopups}>
                     {this.props.children}
                 </span>
-                <div
-                    className={className}
-                    style={st.style}
-                    data-text={st.text}>
-                    <div className="help-popup__wrapper"
-                         onClick={this.popupCb}></div>
-                </div>
+                <HelpPopupCont>
+                    <div
+                        className={className}
+                        style={st.style}
+                        data-text={st.text}>
+                        <div className="help-popup__wrapper"
+                             onClick={this.popupCb}></div>
+                    </div>
+                </HelpPopupCont>
             </>
         );
     }
