@@ -31,14 +31,7 @@ class HelpPopup extends Component<IHelpPopupProps, IHelpPopupState> {
 
     componentDidMount(): void {
         const {addPopup, id, text, position} = this.props;
-        const elCur : any = this.elRef.current;
-        const el = {
-            top: elCur.offsetTop,
-            left: elCur.offsetLeft,
-            height: elCur.offsetHeight,
-            width: elCur.offsetWidth
-        }
-        addPopup(id, text, position, el);
+        addPopup(id, text, position, this.elRef);
     }
 
     render() {

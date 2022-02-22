@@ -1,17 +1,15 @@
 import {ADD_POPUP} from "./constants";
 import {IActionAddPopup, IHelpPopup} from "./types";
 
-const helpPopups = (state:Array<IHelpPopup> = [], {type, id, el, text, position}:IActionAddPopup) => {
+const helpPopups = (state:Array<IHelpPopup> = [], {type, id, text, position, ref}:IActionAddPopup) => {
     switch (type) {
         case ADD_POPUP :
-            return state.filter((el) => (el.id === id)).length
-                ? state
-                : [
+            return [
                     ...state, {
                         id,
                         position,
-                        el,
-                        text
+                        text,
+                        ref
                     }];
         default:
             return state;

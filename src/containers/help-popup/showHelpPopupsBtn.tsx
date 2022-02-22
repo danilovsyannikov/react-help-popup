@@ -35,21 +35,23 @@ class ShowHelpPopupsBtn extends Component<{ helpPopups: Array<IHelpPopup>, child
     showAllPopups = (): void => {
         const {helpPopups}: { helpPopups: Array<IHelpPopup> } = this.props;
         let cur = this.state.cur;
+        console.log(helpPopups);
         if(helpPopups.length){
             this.showPopup(helpPopups[cur]);
         }
     }
 
-    showPopup({position, text, el}: IHelpPopup) {
+    showPopup({position, text, ref}: IHelpPopup) {
+        const padding: number = 4;
         this.setState(({cur}) => ({
             showed: true,
             position,
             text,
             style: {
-                top: el.top,
-                left: el.left,
-                height: el.height,
-                width: el.width
+                top: ref.current!.offsetTop - padding,
+                left: ref.current!.offsetLeft - padding,
+                height: ref.current!.offsetHeight + (2 * padding),
+                width: ref.current!.offsetWidth + (2 * padding)
             },
             cur
         }))
