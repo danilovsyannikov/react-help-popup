@@ -1,6 +1,5 @@
 import {ADD_POPUP} from "./constants";
 import React, {RefObject} from "react";
-import HelpPopupCont from "./helpPopupCont";
 
 export interface IShowHelpPopupsBtnState {
     style: { //данные для позиционирования к нужному DOM-элементу
@@ -40,10 +39,6 @@ export interface IHelpPopupProps {
     id: string,
     text: string,
     position: Position,
-}
-
-export interface IHelpPopupState{
-
 }
 
 export interface IHelpPopupContProps {

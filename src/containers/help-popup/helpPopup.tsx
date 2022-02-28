@@ -1,7 +1,7 @@
 import {addPopup} from "./actions";
-import React, {Component, RefObject} from "react";
+import React, {RefObject, useEffect, useRef} from "react";
 import {connect} from "react-redux";
-import {IHelpPopup, IHelpPopupProps, IHelpPopupState} from "./types";
+import {IHelpPopup, IHelpPopupProps} from "./types";
 
 /**
  * Компонент-обертка для элемента, к которому нужно показать подсказку
@@ -20,28 +20,19 @@ import {IHelpPopup, IHelpPopupProps, IHelpPopupState} from "./types";
  *
  */
 
-class HelpPopup extends Component<IHelpPopupProps, IHelpPopupState> {
+const HelpPopup: React.FC<IHelpPopupProps> = (props) => {
 
-    elRef: RefObject<HTMLDivElement>;
-
-    constructor(props: IHelpPopupProps) {
-        super(props);
-        this.elRef = React.createRef();
-    }
-
-    componentDidMount(): void {
-        const {addPopup, id, text, position} = this.props;
-        addPopup(id, text, position, this.elRef);
-    }
-
-    render() {
-        const {children}: any = this.props;
-        return (
-            <div ref={this.elRef} {...children.props}>
-                {children}
-            </div>
-        );
-    }
+    const elRef: RefObject<HTMLDivElement> = useRef(null);
+    useEffect(() => {
+        const {addPopup, id, text, position} = props;
+        addPopup(id, text, position, elRef);
+    }, [])
+    return (
+        <div ref={elRef}>
+            {props.children}
+        </div>
+    );
+    // }
 }
 
 export default connect(({helpPopups}: { helpPopups: Array<IHelpPopup> }) => ({
